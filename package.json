@@ -1,0 +1,28 @@
+{
+  "name": "session-jwt",
+  "version": "1.0.0",
+  "description": "Código  em Javascript destinado a construir as bases de um sistema de sessão utilizando JWT e Express. ",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FaSn0w/estudo-criptografia.git"
+  },
+  "keywords": [
+    "Javascript",
+    "cripto",
+    "JWT",
+    "Express",
+    "password",
+    "hash",
+    "rsa"
+  ],
+  "author": "Fabrício Neves",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FaSn0w/estudo-criptografia/issues"
+  },
+  "homepage": "https://github.com/FaSn0w/estudo-criptografia#readme"
+}
