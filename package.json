@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Código  em Javascript destinado a construir as bases de um sistema de sessão utilizando JWT e Express. ",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "npm start"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
