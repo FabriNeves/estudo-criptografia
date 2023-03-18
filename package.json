@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/FaSn0w/estudo-criptografia/issues"
   },
-  "homepage": "https://github.com/FaSn0w/estudo-criptografia#readme"
+  "homepage": "https://github.com/FaSn0w/estudo-criptografia#readme",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0"
+  }
 }
