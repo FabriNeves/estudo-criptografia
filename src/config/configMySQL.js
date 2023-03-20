@@ -18,6 +18,7 @@ if (dbStatusCreate) {
   await createDataBase(dbName,DB_PASSWORD);
   dbStatusCreate = false;
   console.log(dbStatusCreate); 
+ 
 }
 
 export default sequelize;
