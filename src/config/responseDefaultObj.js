@@ -1,8 +1,9 @@
 class baseReponseModule {
-    constructor(message, isSuccess, status) {
+    constructor(message, isSuccess, status,auth) {
         this.message = message;
         this.isSuccess = isSuccess;
         this.status = status;
+        this.auth = auth;
     }
 
     toJSON() {
@@ -10,6 +11,7 @@ class baseReponseModule {
             message: this.message,
             isSuccess: this.isSuccess,
             status: this.status,
+            auth: this.auth,
         };
     }
 }
