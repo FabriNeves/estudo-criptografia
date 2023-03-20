@@ -5,8 +5,10 @@ const registerRouter = express.Router();
 
 const nomeRota = "register";
 
-registerRouter .route(`/${nomeRota}`)  
-  .post(loginControllers.register); 
+registerRouter.route(`/${nomeRota}`)
+  .post(loginControllers.register);
 
+registerRouter.route(`/${nomeRota}`)
+  .post(loginControllers.delete);
 
 export default registerRouter;
