@@ -1,1 +1,1 @@
-// cada modelo de aplicação fica guardado aqui.
+Cada modelo da aplicação fica guardado aqui.
