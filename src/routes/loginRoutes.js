@@ -6,8 +6,10 @@ const loginRouter = express.Router();
 const nomeRota = "login";
 
 loginRouter.route(`/${nomeRota}`)
-  .get(loginControllers.read)
-  .get(loginControllers.login); 
+  .get(loginControllers.login);
+
+loginRouter.route(`/${nomeRota}/dev`)
+  .get(loginControllers.read);
 
 
 export default loginRouter;

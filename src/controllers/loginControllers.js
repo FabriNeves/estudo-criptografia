@@ -1,13 +1,53 @@
 import { User } from '../models/loginSchema.js';
 // modulo de resposta | Sugestão do Jean 
 import baseReponseModule from "../config/responseDefaultObj.js";
+// JWT
+import jwt from 'jsonwebtoken';
 
+// carregar variaveis de ambiente  | Boa prática
+import dotenv from "dotenv";
+
+dotenv.config();
+const SECRETKEY = process.env.SECRETKEY;
 
 
 class loginControllers {
     static async login(req, res) {
-        res.status(200).send("ok!");
+        const { email, password } = req.body;
+        console.log({ email, password });
+        const hash = password;
+        try {
+            // invalid user/email or password
+            const user = await User.findOne({ where: { email } });
+            if (!user) {
+                const response = new baseReponseModule(`Invalid user/email or password`, false, 404, "not required");
+                res.status(404).send(response.toJSON());
+                return;
+            }
+
+            //* add  aqui a comparação de hash *//
+            
+            const userAuth = await User.findOne({ where: { hash } })
+            if (!userAuth) {
+                const response = new baseReponseModule(`Invalid user/email or password`, false, 401, "not required");
+                res.status(401).send(response.toJSON());
+                return;
+            }
+            // Resposta
+            const id = user.id;
+            console.log(id);
+            const token = jwt.sign({ id }, SECRETKEY, {
+                expiresIn: '1h'// expires in 5min
+            });
+            const response = new baseReponseModule({ user: id, auth: true, token: token }, true, 200, "required");
+            res.status(200).send(response.toJSON());
+        } catch (error) {
+            // Resposta
+            const response = new baseReponseModule(error.errors, false, 500, "not required");
+            res.status(500).send(response.toJSON());
+        }
     }
+
     // Somente para desenvolvimento. 
     static async read(req, res) {
         try {
@@ -61,7 +101,7 @@ class loginControllers {
             const user = await User.findOne({ where: { id } });
             if (user) {
                 await user.destroy();
-                const response = new baseReponseModule({comandName:"delete",id: id,user:user}, true, 200, "required");
+                const response = new baseReponseModule({ comandName: "delete", id: id, user: user }, true, 200, "required");
                 res.status(200).send(response.toJSON());
             } else {
                 const response = new baseReponseModule("user not found", false, 404, "required");
