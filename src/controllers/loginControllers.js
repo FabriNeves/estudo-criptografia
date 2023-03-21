@@ -26,7 +26,7 @@ class loginControllers {
             }
 
             //* add  aqui a comparação de hash *//
-            
+
             const userAuth = await User.findOne({ where: { hash } })
             if (!userAuth) {
                 const response = new baseReponseModule(`Invalid user/email or password`, false, 401, "not required");
