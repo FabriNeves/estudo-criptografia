@@ -5,11 +5,11 @@ class User {
     constructor(username, email, hashedPassword) {
         this.username = username;
         this.email = email;
-        this.hashedPassword = hashedPassword;
+        this.hash = hashedPassword;
     }
 
-    async verifyPassword(password) {
-        const match = await bcrypt.compare(password, this.hashedPassword);
+    static async verifyPassword(password,hash) {
+        const match = await bcrypt.compare(password,hash);
         return match;
     }
 

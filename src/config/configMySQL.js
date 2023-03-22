@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import createDataBase from "./index.js";
+import createDataBase from "./createDB.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -11,7 +11,7 @@ const sequelize = new Sequelize(dbName, "root", DB_PASSWORD, {
   dialect: "mysql",
 });
 
-let dbStatusCreate = true;
+let dbStatusCreate = false;
 
 
 if (dbStatusCreate) {

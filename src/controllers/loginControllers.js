@@ -1,6 +1,11 @@
 import { User } from '../models/loginSchema.js';
 // modulo de resposta | Sugestão do Jean 
 import baseReponseModule from "../config/responseDefaultObj.js";
+
+// Importação de User 
+import userModule from '../config/userModule.js';
+
+// colocar todo o JWT em um unico arquivo
 // JWT
 import jwt from 'jsonwebtoken';
 
@@ -13,9 +18,7 @@ const SECRETKEY = process.env.SECRETKEY;
 
 class loginControllers {
     static async login(req, res) {
-        const { email, password } = req.body;
-        console.log({ email, password });
-        const hash = password;
+        const { email, password } = req.body;       
         try {
             // invalid user/email or password
             const user = await User.findOne({ where: { email } });
@@ -24,18 +27,15 @@ class loginControllers {
                 res.status(404).send(response.toJSON());
                 return;
             }
-
-            //* add  aqui a comparação de hash *//
-
-            const userAuth = await User.findOne({ where: { hash } })
-            if (!userAuth) {
+            //* add  aqui a comparação de hash *//            
+            const match = await userModule.verifyPassword(password, user.dataValues.hash);
+            if (!match) {
                 const response = new baseReponseModule(`Invalid user/email or password`, false, 401, "not required");
                 res.status(401).send(response.toJSON());
                 return;
             }
             // Resposta
-            const id = user.id;
-            console.log(id);
+            const id = user.id;            
             const token = jwt.sign({ id }, SECRETKEY, {
                 expiresIn: '1h'// expires in 5min
             });
@@ -43,6 +43,7 @@ class loginControllers {
             res.status(200).send(response.toJSON());
         } catch (error) {
             // Resposta
+            //console.log(error)
             const response = new baseReponseModule(error.errors, false, 500, "not required");
             res.status(500).send(response.toJSON());
         }
@@ -59,15 +60,18 @@ class loginControllers {
     }
 
     static async register(req, res) {
-        const newRegister = req.body;
+        const { username, email, password } = req.body;
+        const hash = await userModule.hashPassword(password);
+        const newRegister = new userModule(username, email, hash);
+
         try {
             const user = await User.create(newRegister);
             // Resposta
-            const response = new baseReponseModule(`User created :${JSON.stringify(user)}`, true, 200, "not required");
+            const response = new baseReponseModule(`User created :${JSON.stringify(user.username)}`, true, 200, "not required");
             res.status(200).send(response.toJSON());
         } catch (error) {
             // Resposta
-            const response = new baseReponseModule(error.errors, false, 500, "not required");
+            const response = new baseReponseModule(error, false, 500, "not required");
             res.status(500).send(response.toJSON());
         }
 

@@ -4,25 +4,16 @@ import express from "express";
 import loginRouter from "./routes/loginRoutes.js";
 import registerRouter from "./routes/registerRoutes.js";
 
-// modulo de resposta | Sugestão do Jean 
-import baseReponseModule from "./config/responseDefaultObj.js";
-
-// carregar variaveis de ambiente  | Boa prática
-import dotenv from "dotenv";
-
-import jwt from 'jsonwebtoken';
 
 const secretKey = 'minha_chave_secreta';
 
 
 
-dotenv.config();
+
 const app = express();
 
 const SECRETKEY = process.env.SECRETKEY;
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
 app.use(express.json())
 app.use(loginRouter);
 app.use(registerRouter);
@@ -52,19 +43,6 @@ app.get("/", (req, res) => {
   res.status(200).send(response.toJSON());
 
 });
-
-// function verifyJWT(req, res, next) {
-//   const token = req.headers['x-access-token'];
-//   if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
-
-//   jwt.verify(token, SECRETKEY, function (err, decoded) {
-//     if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
-
-//     // se tudo estiver ok, salva no request para uso posterior
-//     req.userId = decoded.id;
-//     next();
-//   });
-// }
 
 // app.get('/clientes', verifyJWT, (req, res, next) => {
 //   console.log("Retornou todos clientes!");

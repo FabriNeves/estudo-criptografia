@@ -1,5 +1,6 @@
 import express from "express";
 import loginControllers from "../controllers/loginControllers.js";
+import {verifyJWT} from "../middleware/verifyJWT.js";
 
 const loginRouter = express.Router();
 
@@ -9,7 +10,7 @@ loginRouter.route(`/${nomeRota}`)
   .get(loginControllers.login);
 
 loginRouter.route(`/${nomeRota}/dev`)
-  .get(loginControllers.read);
+  .get(verifyJWT,loginControllers.read);
 
 
 export default loginRouter;
