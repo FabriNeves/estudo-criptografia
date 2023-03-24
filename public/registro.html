@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/registro.css">
+    <title>Registration Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./login.html">Login</a></li>
+                <li><a href="./registro.html">Registro</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Registration Page</h1>
+    <div class="container">
+        <form id="registration-form" method="POST" action="http://localhost:3000/register">
+            <div class="input">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <span id="username-error" class="error"></span>
+            </div>
+            <div class="input">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span id="email-error" class="error"></span>
+            </div>
+            <div class="input">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <span id="password-error" class="error"></span>
+            </div>
+            <div class="input">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                <span id="confirm-password-error" class="error"></span>
+            </div>
+            <div class="button">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+    <script src="./js/validacao.js"> </script>
+</body>
+</html>

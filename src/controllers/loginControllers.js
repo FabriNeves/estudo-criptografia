@@ -18,7 +18,7 @@ const SECRETKEY = process.env.SECRETKEY;
 
 class loginControllers {
     static async login(req, res) {
-        const { email, password } = req.body;       
+        const { email, password } = req.body;
         try {
             // invalid user/email or password
             const user = await User.findOne({ where: { email } });
@@ -35,11 +35,11 @@ class loginControllers {
                 return;
             }
             // Resposta
-            const id = user.id;            
+            const id = user.id;
             const token = jwt.sign({ id }, SECRETKEY, {
                 expiresIn: '1h'// expires in 5min
             });
-            const response = new baseReponseModule({ user: id, auth: true, token: token }, true, 200, "required");
+            const response = new baseReponseModule({ user: id, auth: true, token: token, expiresIn: "1h" }, true, 200, "required");
             res.status(200).send(response.toJSON());
         } catch (error) {
             // Resposta

@@ -7,7 +7,7 @@ const loginRouter = express.Router();
 const nomeRota = "login";
 
 loginRouter.route(`/${nomeRota}`)
-  .get(loginControllers.login);
+  .post(loginControllers.login);
 
 loginRouter.route(`/${nomeRota}/dev`)
   .get(verifyJWT,loginControllers.read);
