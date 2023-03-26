@@ -1,4 +1,7 @@
 import express from "express";
+import baseReponseModule from "./config/responseDefaultObj.js";
+import cors from "cors";
+
 
 //Rotas 
 import loginRouter from "./routes/loginRoutes.js";
@@ -11,6 +14,11 @@ const secretKey = 'minha_chave_secreta';
 
 
 const app = express();
+
+app.use(cors({
+  origin: '*'
+}));
+
 
 const SECRETKEY = process.env.SECRETKEY;
 
@@ -37,6 +45,12 @@ app.use(registerRouter);
 // app.post('/logout', function(req, res) {
 //     res.json({ auth: false, token: null });
 // })
+
+
+app.post('/testeReq', function(req, res) {
+   console.log(req.body);
+    res.status(200).json(req.body);
+ })
 
 app.get("/", (req, res) => {
   const response = new baseReponseModule(req.body, true, 200, "not required");

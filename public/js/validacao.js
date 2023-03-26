@@ -1,46 +1,78 @@
+
+const loginAPI = new methodsHTTP("http://localhost:3000/");
+
 const form = document.querySelector('#registration-form');
-const usernameInput = document.querySelector('#username');
-const emailInput = document.querySelector('#email');
-const passwordInput = document.querySelector('#password');
-const confirmPasswordInput = document.querySelector('#confirm-password');
+const username = document.querySelector('#username');
+const email = document.querySelector('#email');
+const password = document.querySelector('#password');
+const confirmPassword = document.querySelector('#confirm-password');
 
-document.onclick = function() {
-    console.log("javascript is in the house!")
-};
 
-form.addEventListener('submit', (event) => {
-    // Previne o envio do formulário
+// document.onclick =async function () {
+//     try {
+//         const response = await loginAPI.get();
+//         console.log(response);
+//         // faz algo com a resposta
+//       } catch (error) {
+//         console.error(error);
+//         // lida com o erro
+//       }
+// };
+
+class postUser {
+    constructor(username,email,password){
+        this.username = username,
+        this.email = email,
+        this.password= password
+    }
+}
+function handleSubmit(event) {
     event.preventDefault();
+    // código para enviar os dados do formulário para o servidor
+  }
 
+form.addEventListener('submit',async (event) => {
+    // Cria objeto para envio 
+    const newUser = new postUser(username.value,email.value,password.value); 
+
+   
     // Valida o nome de usuário
     // trim() remove os espaços do valor de username deixando somente letras e numeros(no começo e no fim)
-    if (usernameInput.value.trim() === '') {
+    if (username.value.trim() === '') {
         alert('Por favor, preencha o nome de usuário.');
         return;
-    } else if (usernameInput.value.trim().indexOf(" ") > 0) {
+    } else if (username.value.trim().indexOf(" ") > 0) {
         alert('Por favor o nome do usuário não pode conter espaços.');
         return;
     }
 
     // Valida o endereço de email
-    if (!emailInput.checkValidity()) {
+    if (!email.checkValidity()) {
         alert('Por favor, insira um endereço de email válido.');
         return;
     }
 
     // Valida a senha
-    if (passwordInput.value.length < 8) {
+    if (password.value.length < 8) {
         alert('A senha deve ter pelo menos 8 caracteres.');
         return;
     }
 
     // Valida a confirmação da senha
-    if (passwordInput.value !== confirmPasswordInput.value) {
-        alert('As senhas não correspondem.');
+    if (password.value !== confirmPassword.value) {
+        document.querySelector('#confirm-password-error').textContent = 'As senhas não conferem.';
         return;
     }
 
     // Se todos os campos estiverem válidos, envia o formulário
-    form.submit();
+    try {
+        const response = await loginAPI.post(newUser,"http://localhost:3000/register");
+        console.log(response);
+        // faz algo com a resposta
+      } catch (error) {
+        console.error(error);
+        // lida com o erro
+      }
+    //form.submit();
 });
 

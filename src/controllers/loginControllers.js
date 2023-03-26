@@ -61,6 +61,7 @@ class loginControllers {
 
     static async register(req, res) {
         const { username, email, password } = req.body;
+        console.log(req.body);
         const hash = await userModule.hashPassword(password);
         const newRegister = new userModule(username, email, hash);
 

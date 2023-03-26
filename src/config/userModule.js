@@ -14,19 +14,18 @@ class User {
     }
 
     static async hashPassword(password) {
-        const hash = await bcrypt.hash(password, 10);
+        const hash = await bcrypt.hash(String(password), 10);
         return hash;
     }
 
 }
 
 
-export default User;
-
+export default User; 
 
 // const hash = await User.hashPassword("123NovaSenha")
 // const Usuario = new User("Fabrício", "email@mail.com",hash);
 // console.table(Usuario);
-// console.log(Usuario.hashedPassword);
-// console.log(await Usuario.verifyPassword("123NovaSenha"));
+// console.log(Usuario.hash);
+// console.log(await User.verifyPassword("123NovaSenha",hash));
 

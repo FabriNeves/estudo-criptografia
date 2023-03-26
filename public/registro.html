@@ -20,10 +20,10 @@
     </header>
     <h1>Registration Page</h1>
     <div class="container">
-        <form id="registration-form" method="POST" action="http://localhost:3000/register">
+        <form id="registration-form" method="POST" onsubmit="handleSubmit(event)">
             <div class="input">
                 
-                <input placeholder="User name" type="text" id="username" name="username" required>
+                <input placeholder="Username" type="text" id="username" name="username" required>
                 <span id="username-error" class="error"></span>
             </div>
             <div class="input">
@@ -46,6 +46,8 @@
             </div>
         </form>
     </div>
+    <script src="./js/metodosClass.js"> </script>
     <script src="./js/validacao.js"> </script>
+    
 </body>
 </html>

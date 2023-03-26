@@ -35,6 +35,9 @@ body {
     width: 100%;
     text-align: center;
   }
+  /* span {
+    display: inline-block;
+  } */
   /* Estilos de cabeçalho */
   
   header {
