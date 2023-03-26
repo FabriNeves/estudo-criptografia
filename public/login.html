@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/reset.css">    
-    <link rel="stylesheet" href="./css/login.css">    
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/login.css">
     <title>Login</title>
 </head>
 
@@ -22,12 +22,11 @@
     </header>
     <h1>Login Page</h1>
     <div class="container">
-
-        <form method="GET" action="http://localhost:3000/login">
-            <div class="input">                
-                <input placeholder="Username" type="text" id="username" name="username" required>
+        <form id="login-form" method="POST" >
+            <div class="input">
+                <input placeholder="Email" type="email" id="email" name="email" required>
             </div>
-            <div class="input">                
+            <div class="input">
                 <input placeholder="Password" type="password" id="password" name="password" required>
             </div>
             <div class="button">
@@ -35,14 +34,27 @@
             </div>
         </form>
     </div>
+    <script src="./js/metodosClass.js"></script>
+    <script>
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.querySelector("#email").value;
+            const password = document.querySelector("#password").value;
+
+            const loginData = {
+                email: email,
+                password: password
+            };
+
+            const http = new methodsHTTP();
+            const response = await http.post(loginData, "http://localhost:3000/login");
+            console.log(response);
+        }
+
+        const loginForm = document.querySelector("#login-form");
+        loginForm.addEventListener("submit", handleLogin);
+    </script>
 </body>
-<script src="./js/metodosClass.js"> </script>
-<script>
-    function handleSubmit(event) {
-    event.preventDefault();
-    
-    
-  }
-</script>
 
 </html>

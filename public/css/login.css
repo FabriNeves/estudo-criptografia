@@ -83,8 +83,8 @@ label {
   justify-self: end;
 }
 
-input[type="text"],
-input[type="password"] {
+
+input {
   padding: 0.6rem;
   /* margin-bottom: 10px; */
   border-radius: 5px;
