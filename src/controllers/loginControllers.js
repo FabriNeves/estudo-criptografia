@@ -60,8 +60,7 @@ class loginControllers {
     }
 
     static async register(req, res) {
-        const { username, email, password } = req.body;
-        console.log(req.body);
+        const { username, email, password } = req.body;        
         const hash = await userModule.hashPassword(password);
         const newRegister = new userModule(username, email, hash);
 
@@ -72,7 +71,7 @@ class loginControllers {
             res.status(200).send(response.toJSON());
         } catch (error) {
             // Resposta
-            const response = new baseReponseModule(error, false, 500, "not required");
+            const response = new baseReponseModule(error.errors[0].message, false, 500, "not required");
             res.status(500).send(response.toJSON());
         }
 
