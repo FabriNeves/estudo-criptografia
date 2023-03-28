@@ -20,22 +20,22 @@ const confirmPassword = document.querySelector('#confirm-password');
 // };
 
 class postUser {
-    constructor(username,email,password){
+    constructor(username, email, password) {
         this.username = username,
-        this.email = email,
-        this.password= password
+            this.email = email,
+            this.password = password
     }
 }
 function handleSubmit(event) {
     event.preventDefault();
     // código para enviar os dados do formulário para o servidor
-  }
+}
 
-form.addEventListener('submit',async (event) => {
+form.addEventListener('submit', async (event) => {
     // Cria objeto para envio 
-    const newUser = new postUser(username.value,email.value,password.value); 
+    const newUser = new postUser(username.value, email.value, password.value);
 
-   
+
     // Valida o nome de usuário
     // trim() remove os espaços do valor de username deixando somente letras e numeros(no começo e no fim)
     if (username.value.trim() === '') {
@@ -66,13 +66,26 @@ form.addEventListener('submit',async (event) => {
 
     // Se todos os campos estiverem válidos, envia o formulário
     try {
-        const response = await loginAPI.post(newUser,"http://localhost:3000/register");
+        const response = await loginAPI.post(newUser, "http://localhost:3000/register");
         console.log(response);
+
+        if (response.isSuccess) {
+            const registrationMessage = document.querySelector("#registration-message");
+            registrationMessage.innerHTML = "Registro concluido!";
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 10000);
+
+        } else {
+            console.log(response.message);
+            const registrationMessage = document.querySelector("#registration-message");
+            registrationMessage.innerHTML = `Erro no registro : ${JSON.stringify(response.message)}`;
+        }
         // faz algo com a resposta
-      } catch (error) {
-        console.error(error);
+    } catch (error) {
+        console.log(error);
         // lida com o erro
-      }
+    }
     //form.submit();
 });
 

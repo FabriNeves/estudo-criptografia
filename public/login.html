@@ -22,7 +22,7 @@
     </header>
     <h1>Login Page</h1>
     <div class="container">
-        <form id="login-form" method="POST" >
+        <form id="login-form" method="POST">
             <div class="input">
                 <input placeholder="Email" type="email" id="email" name="email" required>
             </div>
@@ -34,6 +34,7 @@
             </div>
         </form>
     </div>
+    <div id="login-message"></div>
     <script src="./js/metodosClass.js"></script>
     <script>
         async function handleLogin(event) {
@@ -50,10 +51,26 @@
             const http = new methodsHTTP();
             const response = await http.post(loginData, "http://localhost:3000/login");
             console.log(response);
+
+            const loginMessage = document.querySelector("#login-message");
+            if (response.isSuccess) {
+
+                loginMessage.innerHTML = "Login bem sucedido.";
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 10000);
+            } else {
+                loginMessage.innerHTML = "Usuário ou senha inválidos.";
+            }
         }
 
         const loginForm = document.querySelector("#login-form");
         loginForm.addEventListener("submit", handleLogin);
+
+        document.onclick = async function () {
+            const loginMessage = document.querySelector("#login-message");
+            loginMessage.innerHTML = "";
+        };
     </script>
 </body>
 
