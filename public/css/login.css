@@ -108,3 +108,13 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #555;
 }
+
+#login-message {
+  display: block;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  color: #04bceb;
+  font-weight: bold;
+  text-align: center;
+}

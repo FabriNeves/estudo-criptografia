@@ -11,13 +11,13 @@ const sequelize = new Sequelize(dbName, "root", DB_PASSWORD, {
   dialect: "mysql",
 });
 
-let dbStatusCreate = false;
+let dbStatusCreate = true;
 
 
 if (dbStatusCreate) {
   await createDataBase(dbName,DB_PASSWORD);
   dbStatusCreate = false;
-  
+
  
 }
 

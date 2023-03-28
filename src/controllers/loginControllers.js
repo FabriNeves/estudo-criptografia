@@ -99,23 +99,23 @@ class loginControllers {
     //     }
     // }
 
-    static async delete(req, res) {
-        const { id } = req.params;
-        try {
-            const user = await User.findOne({ where: { id } });
-            if (user) {
-                await user.destroy();
-                const response = new baseReponseModule({ comandName: "delete", id: id, user: user }, true, 200, "required");
-                res.status(200).send(response.toJSON());
-            } else {
-                const response = new baseReponseModule("user not found", false, 404, "required");
-                res.status(404).send(response.toJSON());
-            }
-        } catch (error) {
-            const response = new baseReponseModule(error.errors, false, 500, "required");
-            res.status(500).send(response.toJSON());
-        }
-    }
+    // static async delete(req, res) {
+    //     const { id } = req.params;
+    //     try {
+    //         const user = await User.findOne({ where: { id } });
+    //         if (user) {
+    //             await user.destroy();
+    //             const response = new baseReponseModule({ comandName: "delete", id: id, user: user }, true, 200, "required");
+    //             res.status(200).send(response.toJSON());
+    //         } else {
+    //             const response = new baseReponseModule("user not found", false, 404, "required");
+    //             res.status(404).send(response.toJSON());
+    //         }
+    //     } catch (error) {
+    //         const response = new baseReponseModule(error.errors, false, 500, "required");
+    //         res.status(500).send(response.toJSON());
+    //     }
+    // }
 
 }
 
