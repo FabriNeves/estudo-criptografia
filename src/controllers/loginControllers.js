@@ -1,4 +1,4 @@
-import { User } from '../models/loginSchema.js';
+import User  from '../models/loginSchema.js';
 // modulo de resposta | Sugestão do Jean 
 import baseReponseModule from "../config/responseDefaultObj.js";
 
